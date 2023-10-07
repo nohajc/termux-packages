@@ -1,3 +1,3 @@
 #!/bin/bash
 
-termux-apt-repo ~/termux-packages/output ~/gitprojs/nohajc.github.io termux extras
+termux-apt-repo -s ~/termux-packages/output ~/gitprojs/nohajc.github.io termux extras
