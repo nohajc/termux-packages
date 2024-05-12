@@ -2,15 +2,15 @@ TERMUX_PKG_HOMEPAGE=https://github.com/nohajc/termux-adb
 TERMUX_PKG_DESCRIPTION="Run adb and fastboot in Termux without root permissions"
 TERMUX_PKG_LICENSE="Apache-2.0, MIT"
 TERMUX_PKG_MAINTAINER="nohajc"
-TERMUX_PKG_VERSION=0.2.1
-TERMUX_PKG_REVISION=4
+TERMUX_PKG_VERSION=0.2.2
+TERMUX_PKG_REVISION=1
 TERMUX_PKG_GIT_BRANCH="new"
 TERMUX_PKG_SRCURL=https://github.com/nohajc/vendor-adb-patched/archive/refs/heads/new.zip
 #TERMUX_PKG_SRCURL=file:///home/builder/termux-packages/termux-dev/android-tools.git
 TERMUX_PKG_SHA256=SKIP_CHECKSUM
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="brotli, libc++, liblz4, libprotobuf, libusb, termux-api, zlib, zstd"
-TERMUX_PKG_BUILD_DEPENDS="googletest, pcre2"
+TERMUX_PKG_DEPENDS="brotli, libc++, liblz4, libprotobuf-tadb-core, libusb, termux-api, zlib, zstd"
+TERMUX_PKG_BUILD_DEPENDS="googletest, pcre2, libprotobuf"
 
 termux_step_pre_configure() {
 	termux_setup_protobuf
