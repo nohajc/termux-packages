@@ -3,7 +3,7 @@ TERMUX_PKG_DESCRIPTION="Run adb and fastboot in Termux without root permissions"
 TERMUX_PKG_LICENSE="Apache-2.0, MIT"
 TERMUX_PKG_MAINTAINER="nohajc"
 TERMUX_PKG_VERSION=0.2.2
-TERMUX_PKG_REVISION=1
+TERMUX_PKG_REVISION=2
 TERMUX_PKG_GIT_BRANCH="new"
 TERMUX_PKG_SRCURL=https://github.com/nohajc/vendor-adb-patched/archive/refs/heads/new.zip
 #TERMUX_PKG_SRCURL=file:///home/builder/termux-packages/termux-dev/android-tools.git
@@ -22,7 +22,7 @@ termux_step_pre_configure() {
 
 termux_step_make() {
 	(cd ../src/libtermuxadb && \
-		cargo build --jobs "$TERMUX_MAKE_PROCESSES" \
+		cargo build --jobs "$TERMUX_PKG_MAKE_PROCESSES" \
 		--target "$CARGO_TARGET_NAME" --release && \
 		cp target/*/release/libtermuxadb.a ../vendor/)
 
@@ -32,14 +32,14 @@ termux_step_make() {
 	fi
 
 	if test -f build.ninja; then
-		ninja -j $TERMUX_MAKE_PROCESSES
+		ninja -j $TERMUX_PKG_MAKE_PROCESSES
 	elif ls ./*.cabal &>/dev/null; then
-		termux-ghc-setup -j$TERMUX_MAKE_PROCESSES build
+		termux-ghc-setup -j$TERMUX_PKG_MAKE_PROCESSES build
 	elif ls ./*akefile &>/dev/null || [ ! -z "$TERMUX_PKG_EXTRA_MAKE_ARGS" ]; then
 		if [ -z "$TERMUX_PKG_EXTRA_MAKE_ARGS" ]; then
-			make -j $TERMUX_MAKE_PROCESSES $QUIET_BUILD
+			make -j $TERMUX_PKG_MAKE_PROCESSES $QUIET_BUILD
 		else
-			make -j $TERMUX_MAKE_PROCESSES $QUIET_BUILD ${TERMUX_PKG_EXTRA_MAKE_ARGS}
+			make -j $TERMUX_PKG_MAKE_PROCESSES $QUIET_BUILD ${TERMUX_PKG_EXTRA_MAKE_ARGS}
 		fi
 	fi
 }
