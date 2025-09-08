@@ -2,22 +2,26 @@ TERMUX_PKG_HOMEPAGE=https://github.com/nohajc/termux-adb
 TERMUX_PKG_DESCRIPTION="Run adb and fastboot in Termux without root permissions"
 TERMUX_PKG_LICENSE="Apache-2.0, MIT"
 TERMUX_PKG_MAINTAINER="nohajc"
-TERMUX_PKG_VERSION=0.2.2
-TERMUX_PKG_REVISION=3
+TERMUX_PKG_VERSION=0.2.3
+#TERMUX_PKG_REVISION=1
 TERMUX_PKG_GIT_BRANCH="new"
-TERMUX_PKG_SRCURL=https://github.com/nohajc/vendor-adb-patched/archive/refs/heads/new.zip
+TERMUX_PKG_SRCURL=https://github.com/nohajc/vendor-adb-patched/archive/refs/heads/35.0.2.zip
 #TERMUX_PKG_SRCURL=file:///home/builder/termux-packages/termux-dev/android-tools.git
 TERMUX_PKG_SHA256=SKIP_CHECKSUM
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_DEPENDS="brotli, libc++, liblz4, libprotobuf-tadb-core, libusb, termux-api, zlib, zstd"
-TERMUX_PKG_BUILD_DEPENDS="googletest, pcre2, libprotobuf"
+TERMUX_PKG_DEPENDS="brotli, libc++, liblz4, termux-api, zlib, zstd"
+TERMUX_PKG_BUILD_DEPENDS="googletest, pcre2, protobuf-static"
+TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
+-DANDROID_TOOLS_USE_BUNDLED_FMT=ON
+-DANDROID_TOOLS_USE_BUNDLED_LIBUSB=ON
+"
 
 termux_step_pre_configure() {
 	termux_setup_protobuf
 	termux_setup_golang
 	termux_setup_rust
 
-	LDFLAGS+=" $($TERMUX_SCRIPTDIR/packages/libprotobuf/interface_link_libraries.sh)"
+	#LDFLAGS+=" $($TERMUX_SCRIPTDIR/packages/libprotobuf/interface_link_libraries.sh)"
 }
 
 termux_step_make() {
